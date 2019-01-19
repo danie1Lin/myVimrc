@@ -476,8 +476,7 @@ endfunction
 "auto reload vimrc
 augroup myvimrc
         au!
-        au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | call
-        UpdateMyVimrc() | so $MYVIMRC | endif
+        au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | call UpdateMyVimrc() | so $MYVIMRC | endif
 augroup END
 
 
