@@ -472,12 +472,12 @@ let g:workspace_autosave_always = 1
 function UpdateMyVimrc()
     echom system("cp ~/.vimrc ~/myVimrc/.")
     echom system("cd ~/myVimrc && git commit -a -m 'autoupdate' && git push ")
-    so $MYVIMRC
 endfunction
 "auto reload vimrc
 augroup myvimrc
         au!
-        au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | call UpdateMyVimrc() | endif
+        au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | call
+        UpdateMyVimrc() | so $MYVIMRC | endif
 augroup END
 
 
