@@ -471,11 +471,18 @@ nnoremap <leader>s :ToggleWorkspace<CR>
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 let g:workspace_autosave_always = 1
 
+function UpdateMyVimrc()
+    echom system("cp ~/.vimrc ~/myVimrc/.")
+    echom system("cd ~/myVimrc && git commit -a -m 'autoupdate' && git push ")
+    so $MYVIMRC
+endfunction
 "auto reload vimrc
 augroup myvimrc
         au!
-        au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | so $MYVIMRC | endif
+        au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | call UpdateMyVimrc() | endif
 augroup END
+
+
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
