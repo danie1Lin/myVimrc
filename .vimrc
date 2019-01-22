@@ -147,7 +147,9 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+Plug 'fatih/vim-go'
 Plug 'Chiel92/vim-autoformat'
 "ruby languages server protocal
 Plug 'autozimu/LanguageClient-neovim', {
@@ -451,9 +453,9 @@ set fullscreen
 
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
-                        \ 'ruby': ['tcp://localhost:7657'],
-                        \ 'eruby': ['tcp://localhost:7657'],
-                        \ 'go':['golsp']
+                        \ 'ruby': ['tcp://localhost:7658'],
+                        \ 'eruby': ['tcp://localhost:7658'],
+                        \ 'go':['go-langserver']
                         \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -517,7 +519,6 @@ set guitablabel=%N:%M%t " Show tab numbers
 
 set cursorcolumn
 set cursorline
-
 let g:fzf_layout = { 'down': '~40%' }
 
 " In Neovim, you can set up fzf window using a Vim command
@@ -566,3 +567,4 @@ map <Leader>bp orequire'pry';binding.pry<esc>:w<cr>
 set encoding=utf-8
 
 
+let g:deoplete#sources#go#package_dot = 1
