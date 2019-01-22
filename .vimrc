@@ -451,8 +451,8 @@ set fullscreen
 
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
-                        \ 'ruby': ['tcp://localhost:7658'],
-                        \ 'eruby': ['tcp://localhost:7658'],
+                        \ 'ruby': ['tcp://localhost:7657'],
+                        \ 'eruby': ['tcp://localhost:7657'],
                         \ 'go':['golsp']
                         \ }
 
