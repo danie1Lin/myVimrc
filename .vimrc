@@ -117,6 +117,8 @@ Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-endwise'
 " Better autocompletion
 Plug 'sebdah/vim-delve'
+Plug 'Shougo/vimshell.vim'
+Plug 'Shougo/vimproc.vim'
 
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'MarcWeber/vim-addon-mw-utils'
