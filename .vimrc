@@ -116,7 +116,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-endwise'
 " Better autocompletion
-
+Plug 'sebdah/vim-delve'
 
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -194,8 +194,6 @@ if vim_plug_just_installed
 endif
 
 " ============================================================================
-" Vim settings and mappings
-" You can edit them as you wish
 
 " no vi-compatible
 set nocompatible
@@ -204,11 +202,13 @@ set nocompatible
 filetype plugin on
 filetype indent on
 filetype plugin indent on
-" tabs and spaces handling
-set expandtab
-set tabstop=4
-set softtabstop=4
 
+" TAB CONFIG ------------------------------------------
+"default tabs and spaces handling
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 " tab length exceptions on some file types
 augroup EditVim
         autocmd!
@@ -218,10 +218,10 @@ augroup EditVim
         au BufReadPost *.jbuilder setlocal syntax=ruby filetype=ruby
         autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
+" -----------------------------------------------------
 
 " always show status bar
 set ls=2
-
 " incremental search
 set incsearch
 " highlighted search results
@@ -365,12 +365,11 @@ nmap <leader>e :Errors<CR>
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
-" custom icons (enable them if you use a patched font, and enable the previous
-" setting)
+" custom icons (enable them if you use a patched font, and enable the previous setting)
 "let g:syntastic_error_symbol = '✗'
 "let g:syntastic_warning_symbol = '⚠'
-"let g:syntastic_style_error_symbol = '✗'
-"let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
 
 " Jedi-vim ------------------------------
 
@@ -410,9 +409,11 @@ vmap <expr> D DVB_Duplicate()
 " this first setting decides in which order try to guess your current vcs
 " UPDATE it to reflect your preferences, it will speed up opening files
 let g:signify_vcs_list = [ 'git', 'hg' ]
+
 " mappings to jump to changed blocks
 nmap <leader>sn <plug>(signify-next-hunk)
 nmap <leader>sp <plug>(signify-prev-hunk)
+
 " nicer colors
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
 highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
@@ -420,8 +421,6 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-
-" Window Chooser ------------------------------
 
 " mapping
 nmap  -  <Plug>(choosewin)
@@ -446,11 +445,13 @@ let g:airline#extensions#whitespace#enabled = 1
 "let g:airline_symbols.readonly = '⭤'
 "let g:airline_symbols.linenr = '⭡'
 
+let mapleader = ";"
 
-"設定gui
+"gui font and windows size config
 set guifont=Monaco:h13
 set fullscreen
 
+"langserver config
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
                         \ 'ruby': ['tcp://localhost:7658'],
@@ -464,24 +465,24 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
-let mapleader = ";"
 
-"config session
+"session config
 nnoremap <leader>s :ToggleWorkspace<CR>
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+let g:workspace_session_disable_on_args = 1
 let g:workspace_autosave_always = 1
 
+"auto save vimrc
 function UpdateMyVimrc()
     echom system("cp ~/.vimrc ~/myVimrc/.")
     echom system("cd ~/myVimrc && git commit -a -m 'autoupdate' && git push ")
 endfunction
+
 "auto reload vimrc
 augroup myvimrc
         au!
         au BufWritePost .vimrc so $MYVIMRC | if has('gui_running') | call UpdateMyVimrc() | so $MYVIMRC | endif
 augroup END
-
-
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -491,18 +492,19 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-
 let g:syntastic_mode_map = { 'mode': 'active',
                         \ 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
 "auto format
 noremap <leader>f :Autoformat<CR>
+
 "indent guide
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 2
 
+"set vim page label and switch between them
 nnoremap <Leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -512,11 +514,11 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
-"Previous and next window
 nnoremap <S-Left> gT
 nnoremap <S-Right> gt
 set guitablabel=%N:%M%t " Show tab numbers
 
+"
 set cursorcolumn
 set cursorline
 let g:fzf_layout = { 'down': '~40%' }
