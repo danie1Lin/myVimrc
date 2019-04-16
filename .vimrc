@@ -127,8 +127,6 @@ Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
-" Automatically sort python imports
-Plug 'fisadev/vim-isort'
 " Drag visual blocks arround
 Plug 'fisadev/dragvisuals.vim'
 " Window chooser
