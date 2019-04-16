@@ -518,7 +518,7 @@ nnoremap <S-Left> gT
 nnoremap <S-Right> gt
 set guitablabel=%N:%M%t " Show tab numbers
 
-vnoremap <TAB> >>
+vnoremap <TAB> gv|>>
 nnoremap <TAB> >>
 vnoremap <S-TAB> <<
 nnoremap <S-TAB> <<
