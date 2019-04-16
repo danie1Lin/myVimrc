@@ -520,8 +520,8 @@ nnoremap <S-Left> gT
 nnoremap <S-Right> gt
 set guitablabel=%N:%M%t " Show tab numbers
 
-vnoremap <TAB> <S-.>
-nnoremap <TAB> <S-.>
+vnoremap <TAB> >
+nnoremap <TAB> >
 
 set cursorcolumn
 set cursorline
