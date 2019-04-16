@@ -520,7 +520,9 @@ nnoremap <S-Left> gT
 nnoremap <S-Right> gt
 set guitablabel=%N:%M%t " Show tab numbers
 
-"
+vmoremap <TAB> <S-.>
+
+
 set cursorcolumn
 set cursorline
 let g:fzf_layout = { 'down': '~40%' }
@@ -572,3 +574,5 @@ set encoding=utf-8
 
 
 let g:deoplete#sources#go#package_dot = 1
+
+
